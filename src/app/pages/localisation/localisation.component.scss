@@ -22,3 +22,37 @@
     flex-wrap: wrap;
 }
   
+
+.header {
+  width: 100%;
+
+  .card-headers {
+    width: 100%;
+  }
+
+  .input-icon-wrapper {
+    width: 400px;
+    position: relative;
+
+    input {
+      width: 100%;
+      padding-left: 2.5rem;
+    }
+
+    .input-icon {
+      position: absolute;
+      top: 50%;
+      left: 0.75rem;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+  }
+
+
+
+  .gap-2 {
+    gap: 0.75rem;
+  }
+}
+
+

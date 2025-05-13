@@ -51,6 +51,9 @@ html, body, nb-layout, nb-theme-wrapper {
   font-family: "Font Awesome 6 Free" !important;
   font-weight: 900;
 }
+nb-layout .layout .layout-container .content .columns nb-layout-column{
+  padding: 10px 20px;
+}
 nb-card{
   height: 100% !important;
 }

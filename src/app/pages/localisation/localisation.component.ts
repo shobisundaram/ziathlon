@@ -213,7 +213,7 @@ export class LocalisationComponent {
   }
 
   onAdd(event: any){
-
+    this.openaddoreditDialog(this.AddorEditDialog);
   }
   onFilter(event: any){
     this.openFilterDialog(this.FilterDialog)

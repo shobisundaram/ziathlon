@@ -127,13 +127,15 @@ import { RIGHT_MENU_ITEMS } from '../../../pages/right-menu';
           </li>
         </ul>
       </nb-sidebar>
-      <nb-layout-footer fixed>
-        <ngx-footer></ngx-footer>
-      </nb-layout-footer>
+  
     </nb-layout>
   `,
 })
 export class OneColumnLayoutComponent {
+
+      // <nb-layout-footer fixed>
+      //   <ngx-footer></ngx-footer>
+      // </nb-layout-footer>
   menu = MENU_ITEMS;
   rightMenu = RIGHT_MENU_ITEMS;
   activeSection: any = null;

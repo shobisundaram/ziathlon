@@ -57,6 +57,10 @@ onRowsChange(event: any) {
         break;
     }
   }
+  getActionButtonClass(type: string): string {
+  if (type === 'deleteItem') return 'custom-delete-btn';
+  return '';
+  }
 
   isAction(col: any): boolean {
     return !!col.type;
@@ -67,4 +71,15 @@ onRowsChange(event: any) {
     this.rows = event.rows;
     this.currentPage = event.page;
   }
+  getStatusClass(status: string): string {
+    switch (status.toLowerCase()) {
+      case 'active':
+        return 'status-active';
+      case 'inactive':
+        return 'status-inactive';
+      default:
+        return '';
+    }
+  }
+
 }

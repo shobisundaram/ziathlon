@@ -13,7 +13,7 @@
 ::ng-deep.p-datatable .p-datatable-tbody>tr>td,
 ::ng-deep.p-datatable .p-datatable-thead>tr>th{
   padding: 1rem;
-  max-width: 260px;
+  max-width: 250px;
 }
 
 ::ng-deep.p-datatable .p-datatable-tbody>tr>td {
@@ -41,6 +41,9 @@
   padding: 8px !important;
   font-size: 16px;
   border-radius: 4px;
+  background-color: #E3EBFF !important;
+  border-color: #E3EBFF !important;
+  color: #474747 !important;
 }
 
 ::ng-deep .p-datatable .p-paginator-bottom {
@@ -142,4 +145,24 @@
     z-index: 1;
   }
 }
+.status-active {
+  color: #009B39;
+  background-color: #CBFFDE;
+  padding: 2px 10px;
+  border-radius: 16px;
+}
 
+.status-inactive {
+  color: #F93232;
+  background-color: #FFDDDD;
+  padding: 2px 10px;
+  border-radius: 16px;
+}
+.custom-delete-btn {
+  color: #F93232 !important;
+  background-color: #FFDDDD !important;
+  border: none;
+  // &:hover {
+  //   background-color: #f5c6cb;
+  // }
+}

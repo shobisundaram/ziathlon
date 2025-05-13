@@ -7,14 +7,24 @@
   <ng-template pTemplate="body" let-row let-i="rowIndex">
     <tr>
       <td *ngFor="let col of headers">
-        <ng-container *ngIf="!isAction(col)">
-          {{ col.field === 'index' ? i + 1 : row[col.field] }}
+        <ng-container *ngIf="col.field === 'status'; else defaultCell">
+          <span [ngClass]="getStatusClass(row[col.field])">
+            {{ row[col.field] }}
+          </span>
         </ng-container>
+
+        <ng-template #defaultCell>
+          {{ col.field === 'index' ? i + 1 : row[col.field] }}
+        </ng-template>
+        <!-- <ng-container *ngIf="!isAction(col)">
+          {{ col.field === 'index' ? i + 1 : row[col.field] }}
+        </ng-container> -->
         <ng-container *ngIf="isAction(col)">
           <button
             nbButton size="small" shape="square"
             class="custom-button"
-            (click)="handleAction(col.type, row)">
+            [class]="getActionButtonClass(col.type)"
+            (click)="handleAction(col.type)">
             <i [class]="col.icon"></i>
           </button>
         </ng-container>
