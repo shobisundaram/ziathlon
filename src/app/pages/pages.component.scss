@@ -1,0 +1,31 @@
+@import '../@theme/styles/themes';
+
+@include nb-install-component() {
+  ::ng-deep router-outlet + * {
+    display: block;
+    animation: fade 1s;
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  }
+  ::ng-deep .p-element .p-dialog-mask .p-dialog{
+    background-color: var(--card-background-color) !important;
+    border: var(--card-border-width) var(--card-border-style) var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+    color: var(--card-text-color);
+  }
+
+  ::ng-deep .p-dialog-mask {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    // backdrop-filter: blur(5px);
+  }
+  
+}

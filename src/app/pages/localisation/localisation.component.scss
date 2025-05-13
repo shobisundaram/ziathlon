@@ -1,0 +1,24 @@
+.input-icon-wrapper {
+    position: relative;
+  
+    input {
+      padding-left: 2.5rem; // Make space for icon
+      background-color: #fff !important;
+    }
+  
+    .input-icon {
+      position: absolute;
+      top: 50%;
+      left: 0.75rem;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: #999;
+    }
+}
+.align{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+  

@@ -1,0 +1,132 @@
+.slide-in-calendar {
+      width: 100%;
+      max-width: 1200px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+      margin: 0;
+      padding: 0;
+      animation: slideFromRight 0.3s ease-out forwards;
+      z-index: 1040;
+    }
+
+    @keyframes slideFromRight {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+
+
+nb-card{
+    border-radius: 0 !important;
+}    
+::ng-deep .fc-direction-ltr .fc-button-group > .fc-button:not(:last-child){
+    border-bottom-right-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
+::ng-deep .fc-prev-button,
+::ng-deep .fc-today-button,
+::ng-deep .fc-next-button{
+    background-color: #F4F4F5 !important;
+    color: #000 !important;
+    border-color: #fff !important;
+}
+::ng-deep .fc-direction-ltr .fc-button-group > .fc-button:not(:first-child){
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+};
+::ng-deep .fc .fc-button-primary:focus{
+    border: unset !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+::ng-deep .fc-direction-ltr .fc-button-group > .fc-timeGridDay-button,
+::ng-deep .fc-direction-ltr .fc-button-group > .fc-timeGridWeek-button,
+::ng-deep .fc-direction-ltr .fc-button-group > .fc-dayGridMonth-button,
+::ng-deep .fc-direction-ltr .fc-button-group > .fc-dayGridYear-button{
+    background-color: unset !important;
+    border: unset !important;
+    color: black !important;
+    text-transform: capitalize;
+}
+
+::ng-deep .fc .fc-button-primary:not(:disabled).fc-button-active, .fc .fc-button-primary:not(:disabled):active{
+    background-color: #DC2626 !important;
+    border-radius: 8px !important;
+    border: unset !important;
+    color: white !important;
+}
+.flex-col{
+    flex-direction: column;
+}
+.event-title {
+    white-space: nowrap;
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 2;      
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+    line-height: 1.3;
+    height: auto;
+    }
+.overflow-ellipsis {
+  text-overflow: ellipsis;
+}
+::ng-deep .fc-timegrid-event {
+  border-left: 6px solid var(--fc-border-color); // Controlled via inline style
+  border-radius: 6px;
+  padding-left: 8px;
+  font-size: 13px;
+  box-shadow: none;
+  background-clip: padding-box;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+}
+
+::ng-deep .fc .fc-timegrid-event {
+  padding: 6px;
+}
+::ng-deep .fc .fc-timegrid-slot{
+    height: 3.5rem;
+}
+::ng-deep .fc .fc-col-header-cell-cushion {
+    width: 100%;
+    text-align: start;
+    height: 5rem;
+    padding: 2px 8px !important;
+    .custom-day-header{
+        .weeks{
+            color: #71717A;
+            font-size: 12px;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+        .day-number{
+            font-size: 22px;
+            font-weight: 400; 
+        }
+    }
+}
+::ng-deep .fc-timeGridWeek-view td.fc-weekend,
+::ng-deep .fc-timeGridWeek-view th.fc-weekend {
+  background-color: #FAFAFA !important;
+}
+
+::ng-deep .fc .fc-button{
+    padding: 0.2em 0.65em !important;
+    border-radius: 4px !important
+}
+
+::ng-deep .fc-search-input:focus {
+  outline: none;
+  box-shadow: 0 0 2px rgba(0, 123, 255, 0.4);
+}

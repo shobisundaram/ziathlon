@@ -1,0 +1,99 @@
+<nb-card>
+    <nb-card-header>
+        <h3 class="tx-color-01 mg-b-5 " id="title"> 
+            <button nbTooltipStatus="danger" nbTooltip="{{'GoBack'}}"
+            nbTooltipPlacement="bottom" (click)="goBackBtn()" nbButton ghost status="danger" style="padding: 0px;">
+            <nb-icon icon="arrow-back-outline"></nb-icon>
+          </button> 
+        </h3>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="login-wrapper">
+            <div class="login-left">
+              <img src="assets/images/login.png" alt="Security Illustration" />
+            </div>
+            <div class="login-right">
+                <form [formGroup]="registerForm" (ngSubmit)="register()">
+                    <h2>Create an account</h2>
+                    <div class="form-group">
+                        <div class="">
+                            <label for="fname" class="label col-form-label">First Name
+                                <span class="star">*</span>
+                            </label>
+                            <input formControlName="name" type="text" nbInput fullWidth id="name"
+                                placeholder="Name" />
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert-danger">
+                                <div *ngIf="name.errors?.['required']">
+                                    Name is required!
+                                </div>
+                                <div *ngIf="name.errors?.['pattern']">
+                                    Text Alone Allowed
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="email" class="label col-form-label">Email <span class="star">*</span></label>
+                            <input formControlName="email" type="text" nbInput fullWidth id="email"
+                                placeholder="Email" />
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert-danger">
+                                <div *ngIf="email.errors?.['required']">
+                                    Email is required!
+                                </div>
+                                <div *ngIf="email.errors?.['email']">
+                                    Enter the valid Email.
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" inner-addon">
+                            <label for="password" class="label col-form-label">Password
+                              <span class="star">*</span></label>
+                            <div class="input-group">
+                  
+                              <input formControlName="password" [type]="showPassword ? 'text' : 'password'" nbInput fullWidth
+                                id="password" placeholder="Password" />
+                              <div>
+                                <i alt="show" class="far fa-eye eye-show" (click)="showPassword = !showPassword"
+                                  [class.passwordHide]="showPassword" (keydown)="onKeyDownHandler($event)">
+                                </i>
+                                <i alt="hide" class="far fa-eye-slash eye-hide" (click)="showPassword = !showPassword"
+                                  [class.passwordHide]="!showPassword" (keypress)="onKeyPressHandler($event)">
+                                </i>
+                  
+                              </div>
+                  
+                            </div>
+                            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert-danger">
+                              <div *ngIf="password.errors?.['required']">
+                                Password is required!
+                              </div>
+                              <div *ngIf="registerForm.get('password').errors?.pattern">
+                                Valid Password is required! (min 8 Character with Uppercase, Lowercase, Special character, Number)
+                              </div>
+                            </div>
+                          </div>
+                          <div class="">
+                            <label for="confirmPassword" class="label col-form-label">Confirm Password <span class="star">*</span></label>
+                            <input formControlName="confirmPassword" type="password" nbInput fullWidth id="confirmPassword"
+                              placeholder="Confirm Password"
+                              [readonly]="registerForm.controls.password.status == 'VALID' ? false : true" />
+                            <div
+                              *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched) && (registerForm.controls.password.status == 'VALID')"
+                              class="alert-danger">
+                              <div *ngIf="confirmPassword.errors?.['required']">
+                                Confirm Password is required!
+                              </div>
+                              <div *ngIf="registerForm.controls['confirmPassword'].errors?.['MatchPassword']">
+                                Confirm Password miss Match.
+                              </div>
+                            </div>
+                        </div>
+
+                        <button nbButton status="primary" fullWidth type="submit" [disabled]="registerForm.invalid || IsDisabled" class="my-3">
+                            REGISTER
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

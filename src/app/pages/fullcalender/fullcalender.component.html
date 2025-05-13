@@ -1,0 +1,24 @@
+<!-- <full-calendar
+  defaultView="timeGridWeek"
+  [plugins]="calendarPlugins"
+  [header]="calendarHeader"
+  [events]="calendarEvents"
+  [slotDuration]="'00:30:00'"
+  [allDaySlot]="false"
+  height="auto">
+</full-calendar> -->
+
+
+    <nb-card class="slide-in-calendar">
+      <nb-card-body>
+          <full-calendar [options]="calendarOptions">
+            <ng-template #eventContent let-arg>
+            <div class="custom-event-wrapper" nbTooltip="{{ arg.event.title }}">
+                <p class="event-time mb-1">{{ arg.event.start | date: 'shortTime' }}</p>
+                <p class="event-title mb-0">{{ arg.event.title }}</p>
+            </div>
+            </ng-template>
+
+          </full-calendar>
+      </nb-card-body>
+    </nb-card>

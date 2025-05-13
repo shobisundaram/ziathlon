@@ -1,0 +1,284 @@
+// @nebular theming framework
+@import "@nebular/theme/styles/theming";
+// @nebular out of the box themes
+@import "@nebular/theme/styles/themes";
+
+:root {
+  --theme-bg: #FAFBFF;
+  --card-bg: #FAFBFF;
+  --card-border-color: #E3E3E3;
+  --button-color: #293548;
+  --button-text: #fff;
+  --label-text: #667085;
+  --theme-color: #723186;
+  --theme-color-bg: #FBECFF;
+
+  // Ensure semicolons are added here
+
+  --header-bg-color: #ffffff;
+  --menu-color : #222b45;
+  --menu-text-size: 0.8125rem;
+  --text-header-size: 0.9375rem;
+  --text-size: 0.875em;
+  --color-text: #000000;
+  --header-color: #8f9bb3;
+  --footer-bg-color: #ffffff;
+  --footer-color: #333333;
+  --back-btn-color: #ff3d71;
+  --black:  #000000; 
+}
+
+.nb-theme-dark  nb-toggle.status-primary .toggle-switcher {
+  background-color: #7b849e !important;
+}
+
+.nb-theme-dark  nb-toggle.status-primary .toggle.checked {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+.nb-theme-dark  nb-toggle.status-primary .native-input:enabled:focus + .toggle.checked {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+.nb-theme-dark nb-toggle.status-primary .native-input:enabled + .toggle:hover.checked {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+.nb-theme-dark nb-toggle.status-primary .native-input:enabled + .toggle:hover {
+  background-color: var(--toggle-primary-hover-background-color);
+  border-color: #ffffff; 
+}
+
+.nb-theme-dark nb-toggle.status-primary .toggle {
+  border-color: #ffffff !important;
+}
+
+.nb-theme-dark  .table > :not(caption) > * > * {
+  color: #000000;
+}
+.nb-theme-dark table[_ngcontent-ng-c3961848250] td[_ngcontent-ng-c3961848250] {
+  color: #000000;
+}
+.nb-theme-default .btn-success,
+.nb-theme-default .btn-primary {
+  background-color: var(--button-color) !important;
+  color: var(--button-text) !important;
+  border-color: var(--button-text) !important;
+}
+
+.nb-theme-dark .btn-success,
+.nb-theme-dark .btn-primary {
+  background-color: var(--input-basic-background-color) !important;
+  color: var(--button-text) !important;
+  border-color: var(--input-basic-background-color) !important;
+}
+
+.nb-theme-dark nb-toggle.status-primary .native-input:enabled + .toggle:hover {
+  border-color: #ffffff !important;
+}
+
+
+::ng-deep .nb-theme-dark  .p-paginator .p-paginator-first,
+::ng-deep .nb-theme-dark  .p-paginator .p-paginator-prev,
+::ng-deep .nb-theme-dark  .p-paginator .p-paginator-next,
+::ng-deep .nb-theme-dark  .p-paginator .p-paginator-last {
+  color: black !important;
+}
+
+
+.nb-theme-dark ::ng-deep .p-paginator .p-paginator-first,
+.nb-theme-dark ::ng-deep .p-paginator .p-paginator-prev,
+.nb-theme-dark ::ng-deep .p-paginator .p-paginator-next,
+.nb-theme-dark ::ng-deep .p-paginator .p-paginator-last {
+  color: var(--color-primary-default) !important;
+}
+
+.nb-theme-dark  .p-paginator button:not(:last-child), .p-paginator .p-paginator-pages .p-paginator-page {
+  border-right: 1px solid #e1e7f1 !important;
+}
+
+.nb-theme-dark  .p-paginator .p-paginator-pages .p-paginator-page{
+  color: var(--color-primary-default) !important;
+}
+.nb-theme-dark  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  color: #ffffff !important;
+  background-color: var(--color-primary-default) !important;
+}
+
+$nb-themes: nb-register-theme((font-family-primary: CabifyCircularWeb-Light,
+      layout-padding-top: 2.25rem,
+
+      color-primary-400: #333333,
+      color-primary-500: #000000,
+      color-primary-600: #000000,
+      color-primary-700: #1a34b8,
+      color-primary-800: #102694,
+      color-primary-900: #091c7a,
+
+
+      color-info-500: #000000,
+      color-info-600: #006fd6,
+      color-info-700: #0057c2,
+      color-info-800: #0041a8,
+      color-info-900: #002885,
+
+      color-basic-100: #ffffff,
+      color-basic-200: #ffffff,
+      color-basic-300: #edf1f7,
+      color-basic-400: #e4e9f2,
+      color-basic-500: #c5cee0,
+
+      text-primary-color: var(--color-text),
+      layout-text-color: var(--color-text),
+      layout-text-font-size: var(--text-size),
+
+      header-background-color: var(--header-bg-color),
+      text-hint-color: var(--header-color),
+      actions-icon-color: var(--header-color),
+      user-name-text-color: var(--header-color),
+      user-initials-text-color: var(--header-color),
+
+      footer-background-color: var(--footer-bg-color),
+      footer-text-color: var(--footer-color),
+      footer-text-highlight-color: var(--footer-color),
+
+      menu-text-color: var(--menu-color),
+      menu-item-hover-text-color: color-mix(in srgb, var(--menu-color), white 20%),
+      menu-item-active-text-color: color-mix(in srgb, var(--menu-color), black 40%),
+      menu-item-icon-color: var(--menu-color),
+      menu-item-hover-icon-color: color-mix(in srgb, var(--menu-color), white 20%),
+      menu-item-active-icon-color: color-mix(in srgb, var(--menu-color), black 40%),
+      menu-item-icon-margin: 0 0.5rem 0 0,
+      menu-text-font-size: var(--menu-text-size),
+
+      card-text-color: var(--color-text),
+      card-height-tiny: 13.5rem,
+      card-height-small: 21.1875rem,
+      card-height-medium: 28.875rem,
+      card-height-large: 36.5625rem,
+      card-height-giant: 44.25rem,
+      card-margin-bottom: 1.875rem,
+      card-header-with-select-padding-top: 0.5rem,
+      card-header-with-select-padding-bottom: 0.5rem,
+      card-header-text-font-size: var(--text-header-size),
+      card-header-text-color: var(--color-text),
+
+      button-filled-success-background-color: var(--button-color),
+      button-filled-success-border-color: var(--button-color),
+      button-filled-success-hover-background-color: var(--button-color),
+      button-filled-success-hover-border-color: var(--button-color),
+      button-filled-success-focus-background-color: var(--button-color),
+      button-filled-success-focus-border-color: var(--button-color),
+      button-filled-success-active-border-color: var(--button-color),
+      button-filled-success-active-background-color: var(--button-color),
+      button-filled-success-text-color: var(--button-text),
+      button-filled-primary-background-color: var(--button-color),
+      button-filled-primary-text-color: var(--button-text),
+      button-filled-primary-border-color: var(--button-color),
+      button-filled-primary-hover-background-color: var(--button-color),
+      button-filled-primary-hover-border-color: var(--button-color),
+      button-filled-primary-focus-background-color: var(--button-color),
+      button-filled-primary-focus-border-color: var(--button-color),
+      button-filled-primary-active-border-color: var(--button-color),
+      button-filled-primary-active-background-color: var(--button-color),
+      select-min-width: 6rem,
+
+      button-ghost-danger-text-color: var(--back-btn-color),
+      
+
+      slide-out-background: #f7f9fc,
+      slide-out-shadow-color: 0 4px 14px 0 #8f9bb3,
+      slide-out-shadow-color-rtl: 0 4px 14px 0 #8f9bb3,
+    ),
+    default,
+    default);
+
+$nb-themes: nb-register-theme((layout-padding-top: 2.25rem,
+
+      menu-item-icon-margin: 0 0.5rem 0 0,
+
+      card-height-tiny: 13.5rem,
+      card-height-small: 21.1875rem,
+      card-height-medium: 28.875rem,
+      card-height-large: 36.5625rem,
+      card-height-giant: 44.25rem,
+      card-margin-bottom: 1.875rem,
+      card-header-with-select-padding-top: 0.5rem,
+      card-header-with-select-padding-bottom: 0.5rem,
+
+      select-min-width: 6rem,
+
+      slide-out-background: #252547,
+      slide-out-shadow-color: 2px 0 3px #29157a,
+      slide-out-shadow-color-rtl: -2px 0 3px #29157a,
+    ),
+    cosmic,
+    cosmic);
+
+$nb-themes: nb-register-theme((layout-padding-top: 2.25rem,
+
+      menu-item-icon-margin: 0 0.5rem 0 0,
+
+      card-height-tiny: 13.5rem,
+      card-height-small: 21.1875rem,
+      card-height-medium: 28.875rem,
+      card-height-large: 36.5625rem,
+      card-height-giant: 44.25rem,
+      card-margin-bottom: 1.875rem,
+      card-header-with-select-padding-top: 0.5rem,
+      card-header-with-select-padding-bottom: 0.5rem,
+
+      select-min-width: 6rem,
+
+      slide-out-background: linear-gradient(270deg, #edf1f7 0%, #e4e9f2 100%),
+      slide-out-shadow-color: 0 4px 14px 0 #8f9bb3,
+      slide-out-shadow-color-rtl: 0 4px 14px 0 #8f9bb3,
+    ),
+    corporate,
+    corporate);
+
+$nb-themes: nb-register-theme((layout-padding-top: 2.25rem,
+
+      color-primary-default: var(--input-basic-background-color),
+      text-primary-color: var(--layout-text-color),
+      menu-submenu-item-hover-text-color: var(--layout-text-color),
+      menu-item-icon-margin: 0 0.5rem 0 0,
+      text-primary-focus-color: #d2d6e5,
+      text-primary-hover-color: #d2d6e5,
+      button-filled-primary-hover-background-color: unset,
+      button-filled-primary-hover-border-color: unset,
+      button-filled-primary-focus-background-color: unset,
+      button-filled-primary-focus-border-color: unset,
+      footer-text-highlight-color: #51689f,
+      button-filled-primary-active-background-color: var(--button-color),
+      button-filled-primary-active-border-color: var(--button-color),
+
+      card-height-tiny: 13.5rem,
+      card-height-small: 21.1875rem,
+      card-height-medium: 28.875rem,
+      card-height-large: 36.5625rem,
+      card-height-giant: 44.25rem,
+      card-margin-bottom: 1.875rem,
+      card-header-with-select-padding-top: 0.5rem,
+      card-header-with-select-padding-bottom: 0.5rem,
+      button-filled-success-background-color: #192038,
+      button-filled-success-border-color: #192038,
+      button-filled-success-hover-background-color: #192038,
+      button-filled-success-hover-border-color: #192038,
+      button-filled-success-focus-background-color: #192038,
+      button-filled-success-focus-border-color: #192038,
+      button-filled-success-active-border-color: #192038,
+      button-filled-success-active-background-color: #192038,
+      button-filled-primary-background-color: #192038,
+
+      select-min-width: 6rem,
+
+      slide-out-background: linear-gradient(270deg, #222b45 0%, #151a30 100%),
+      slide-out-shadow-color: 0 4px 14px 0 #8f9bb3,
+      slide-out-shadow-color-rtl: 0 4px 14px 0 #8f9bb3,
+    ),
+    dark,
+    dark);

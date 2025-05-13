@@ -1,0 +1,389 @@
+<div class="header">
+    <div class="card-headers mb-3">
+        <div class="">
+            <h5 class="mb-0">Localisation</h5>
+            <p class="sub-h-text mb-0">Manage clinics in each city</p>
+        </div>
+        <div class="align">
+            <div class="input-icon-wrapper">
+                <nb-icon icon="search" class="input-icon"></nb-icon>
+                <input nbInput type="text" fullWidth placeholder="Search by clinic name and contact detail" />
+            </div>
+            <button nbButton appearance="outline" status="primary" size="small" (click)="onFilter($event)">
+                <i class="fa-solid fa-filter mr-2"></i>
+                Filters 
+            </button>
+            <button nbButton status="primary" (click)="onAdd($event)" size="small">
+                <nb-icon icon="plus"></nb-icon>
+                Add Clinic 
+            </button>
+        </div>
+
+      </div>
+      <div>
+        <ngx-dynamic-table
+        [headers]="headers"
+        [data]="data"
+        (viewItem)="onView($event)"
+        (editItem)="onEdit($event)"
+        (deleteItem)="onDelete($event)">
+        </ngx-dynamic-table>
+      </div>
+</div>
+
+
+<ng-template class="dialogBox" #FilterDialog let-data let-ref="dialogRef">
+    <nb-card class="">
+        <nb-card-header>
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <h5 class="mb-0 fw-500">Filters</h5>
+                <button nbButton size="small" shape="round" size="small" class="close" (click)="ref.close()">
+                  <nb-icon icon="close-outline"></nb-icon>
+                </button>
+            </div>
+        </nb-card-header>
+        <nb-card-body>
+            <form  [formGroup]="filterForm" autocomplete="off">
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="category" class="label col-form-label">Category
+                            <span class="star">*</span>
+                        </label>
+                        <input formControlName="category" type="text" nbInput fullWidth id="category"
+                            placeholder="Category" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="country" class="label col-form-label">Country <span class="star">*</span></label>
+                        <nb-select formControlName="country" fullWidth placeholder="Select Country">
+                          <nb-option *ngFor="let country of countries" [value]="country.isoCode">
+                            {{ country.name }}
+                          </nb-option>
+                        </nb-select>
+                    </div>
+              
+                    <div class="col-md-6">
+                        <label for="state" class="label col-form-label">State <span class="star">*</span></label>
+                        <nb-select formControlName="state" fullWidth placeholder="Select State">
+                          <nb-option *ngFor="let state of states" [value]="state.isoCode">
+                            {{ state.name }}
+                          </nb-option>
+                        </nb-select>
+                    </div>
+              
+                    <div class="col-md-6">
+                        <label for="city" class="label col-form-label">City <span class="star">*</span></label>
+                        <nb-select formControlName="city" fullWidth placeholder="Select City">
+                          <nb-option *ngFor="let city of cities" [value]="city.name">
+                            {{ city.name }}
+                          </nb-option>
+                        </nb-select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="pincode" class="label col-form-label">Pin Code
+                            <span class="star">*</span>
+                        </label>
+                        <input formControlName="pincode" type="text" nbInput fullWidth id="pincode"
+                            placeholder="PinCode" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="status" class="label col-form-label">Plan Type
+                            <span class="star">*</span>
+                        </label>
+                        <nb-select formControlName="status" fullWidth placeholder="Select an option">
+                            <nb-option *ngFor="let item of availableStatus" [value]="item.value">
+                            {{ item.label }}
+                            </nb-option>
+                        </nb-select>
+                    </div>
+                </div>
+            </form>
+        </nb-card-body>
+        <nb-card-footer>
+            <div class="d-flex  justify-content-end align-items-center w-100">
+                <button type="submit" nbButton status="primary" size="small" (click)="filter()" appearance="outline">
+                    clear
+                </button>
+                &nbsp;&nbsp;
+                <button type="submit" nbButton status="primary" size="small" (click)="clear()">
+                    Filter
+                </button>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+</ng-template>
+<ng-template class="dialogBox" #ViewDialog let-data let-ref="dialogRef">
+    <nb-card class="clinic-dialog">
+        <nb-card-header>
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <h5 class="mb-0 fw-500">Clinic Boundary</h5>
+                <button nbButton size="small" shape="round" (click)="ref.close()" class="close">
+                  <nb-icon icon="close-outline"></nb-icon>
+                </button>
+            </div>
+        </nb-card-header>
+        <nb-card-body>
+            <!-- <div style="width: 100%; height: 500px; position: relative;">
+                <div id="trackerMap" style="height: 500px;">
+                </div>
+                <div #customButtonOverlay class="custom-button-overlay">
+                    <button *ngIf="pointList.length > 0" fullWidth type="submit" nbButton
+                        (click)="deleteSelectedShape()" size="small" class="clear_btn">
+                        <nb-icon icon="close-circle-outline"></nb-icon>
+                    </button>
+                </div>
+            </div> -->
+            <google-map height="400px" width="100%"
+            [center]="center" [zoom]="zoom"
+            (mapClick)="onMapClick($event)">
+                <map-polygon *ngIf="polygonPaths && polygonPaths.length"
+                            [paths]="polygonPaths"
+                            [options]="polygonOptions">
+                </map-polygon>
+            </google-map>
+        </nb-card-body>
+    </nb-card>
+</ng-template>
+<ng-template class="dialogBox" #AddorEditDialog let-data let-ref="dialogRef">
+    <nb-card>
+        <nb-card-header>
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <h5 class="mb-0 fw-500">Enter Details</h5>
+                <button nbButton size="small" class="close" shape="round" (click)="ref.close()">
+                  <nb-icon icon="close-outline"></nb-icon>
+                </button>
+            </div>
+        </nb-card-header>
+        <nb-card-body>
+            <form [formGroup]="localisationForm" autocomplete="off">
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="name" class="label col-form-label">Name
+                            <span class="star">*</span>
+                        </label>
+                        <input formControlName="name" type="text" nbInput fullWidth id="name"
+                            placeholder="Name" />
+                        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert-danger">
+                            <div *ngIf="name.errors?.['required']">
+                                Name is required!
+                            </div>
+                            <div *ngIf="name.errors?.['pattern']">
+                                Text Alone Allowed
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="clinicId" class="label col-form-label">ID
+                            <span class="star">*</span>
+                        </label>
+                        <input formControlName="clinicId" type="text" nbInput fullWidth id="clinicId"
+                            placeholder="clinic Id" />
+                        <div *ngIf="clinicId.invalid && (clinicId.dirty || clinicId.touched)" class="alert-danger">
+                            <div *ngIf="clinicId.errors?.['required']">
+                                clinic Id is required!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="category" class="label col-form-label">Category
+                            <span class="star">*</span>
+                        </label>
+                        <nb-select formControlName="category" fullWidth placeholder="Select an option">
+                            <nb-option *ngFor="let item of categories" [value]="item.value">
+                            {{ item.label }}
+                            </nb-option>
+                        </nb-select>
+                        <div *ngIf="category.invalid && (category.dirty || category.touched)" class="alert-danger">
+                            <div *ngIf="category.errors?.['required']">
+                                Category is required!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="country" class="label col-form-label">Country <span class="star">*</span></label>
+                        <nb-select formControlName="country" fullWidth placeholder="Select Country">
+                          <nb-option *ngFor="let country of countries" [value]="country.isoCode">
+                            {{ country.name }}
+                          </nb-option>
+                        </nb-select>
+                        <div *ngIf="country.invalid && (country.dirty || country.touched)" class="alert-danger">
+                          <div *ngIf="country.errors?.['required']">Country is required!</div>
+                        </div>
+                      </div>
+              
+                      <div class="col-md-6">
+                        <label for="state" class="label col-form-label">State <span class="star">*</span></label>
+                        <nb-select formControlName="state" fullWidth placeholder="Select State">
+                          <nb-option *ngFor="let state of states" [value]="state.isoCode">
+                            {{ state.name }}
+                          </nb-option>
+                        </nb-select>
+                        <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert-danger">
+                          <div *ngIf="state.errors?.['required']">State is required!</div>
+                        </div>
+                      </div>
+              
+                      <div class="col-md-6">
+                        <label for="city" class="label col-form-label">City <span class="star">*</span></label>
+                        <nb-select formControlName="city" fullWidth placeholder="Select City">
+                          <nb-option *ngFor="let city of cities" [value]="city.name">
+                            {{ city.name }}
+                          </nb-option>
+                        </nb-select>
+                        <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert-danger">
+                          <div *ngIf="city.errors?.['required']">City is required!</div>
+                        </div>
+                      </div>
+                    <div class="col-md-6">
+                        <label for="address" class="label col-form-label">Address
+                            <span class="star">*</span>
+                        </label>
+                        <textarea  rows="3" formControlName="address" type="text" nbInput fullWidth id="address"
+                        placeholder="Address"></textarea>
+                        
+                        <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert-danger">
+                            <div *ngIf="address.errors?.['required']">
+                                Address is required!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="pincode" class="label col-form-label">Pin Code
+                            <span class="star">*</span>
+                        </label>
+                        <input formControlName="pincode" type="text" nbInput fullWidth id="pincode"
+                            placeholder="PinCode" />
+                        <div *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)" class="alert-danger">
+                            <div *ngIf="pincode.errors?.['required']">
+                                PinCode is required!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="contactPersonName" class="label col-form-label">Contact Person Name
+                            <span class="star">*</span>
+                        </label>
+                        <input formControlName="contactPersonName" type="text" nbInput fullWidth id="contactPersonName"
+                            placeholder="Contact Person Name" />
+                        <div *ngIf="contactPersonName.invalid && (contactPersonName.dirty || contactPersonName.touched)" class="alert-danger">
+                            <div *ngIf="contactPersonName.errors?.['required']">
+                                Contact Person Name is required!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="contactPersonEmail" class="label col-form-label">Contact Person Name
+                            <span class="star">*</span>
+                        </label>
+                        <input formControlName="contactPersonEmail" type="text" nbInput fullWidth id="contactPersonEmail"
+                            placeholder="Contact Person Email" />
+                        <div *ngIf="contactPersonEmail.invalid && (contactPersonEmail.dirty || contactPersonEmail.touched)" class="alert-danger">
+                            <div *ngIf="contactPersonEmail.errors?.['required']">
+                                Contact Person Email is required!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 inner-addon">
+                        <label for="password" class="label col-form-label">Contact Person Password
+                          <span class="star">*</span></label>
+                        <div class="input-group">
+              
+                          <input formControlName="password" [type]="showPassword ? 'text' : 'password'" nbInput fullWidth
+                            id="password" placeholder="Password" />
+                          <div>
+                            <i alt="show" class="far fa-eye eye-show" (click)="showPassword = !showPassword"
+                              [class.passwordHide]="showPassword" >
+                            </i>
+                            <i alt="hide" class="far fa-eye-slash eye-hide" (click)="showPassword = !showPassword"
+                              [class.passwordHide]="!showPassword">
+                            </i>
+              
+                          </div>
+              
+                        </div>
+                        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert-danger">
+                          <div *ngIf="password.errors?.['required']">
+                            Password is required!
+                          </div>
+                          <div *ngIf="localisationForm.get('password').errors?.pattern">
+                            Valid Password is required! (min 8 Character with Uppercase, Lowercase, Special character, Number)
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phone" class="label col-form-label">Phone no <span class="star">*</span></label>
+                        <input formControlName="phone" [attr.maxlength]="maxPhoneLength"
+                            type="text" nbInput fullWidth id="phone" placeholder="Phone no" />
+                        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert-danger">
+                            <div *ngIf="phone.errors?.['required']">
+                                Phone no is required!
+                            </div>
+                            <div
+                                *ngIf="phone.errors?.['minlength'] || phone.errors?.['maxlength'] || phone.errors?.['pattern']">
+                                Enter the Valid Phone no! (min-8, max-15)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="status" class="label col-form-label">Plan Type
+                            <span class="star">*</span>
+                        </label>
+                        <nb-select formControlName="status" fullWidth placeholder="Select an option">
+                            <nb-option *ngFor="let item of availableStatus" [value]="item.value">
+                            {{ item.label }}
+                            </nb-option>
+                        </nb-select>
+                        <div *ngIf="status.invalid && (status.dirty || status.touched)" class="alert-danger">
+                            <div *ngIf="status.errors?.['required']">
+                                Status is required!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <label for="status" class="label col-form-label">Add Boundary 
+                            <span class="star">*</span>
+                        </label>
+                        <google-map height="400px" width="100%"
+                        [center]="center" [zoom]="zoom"
+                        (mapClick)="onMapClick($event)">
+                            <map-polygon *ngIf="polygonPaths && polygonPaths.length"
+                                        [paths]="polygonPaths"
+                                        [options]="polygonOptions">
+                            </map-polygon>
+                        </google-map>
+                    </div>
+                </div>
+            </form>
+        </nb-card-body>
+        <nb-card-footer>
+            <div class="row justify-content-end">
+                <div class="d-flex flex-row-reverse">
+                    <button fullWidth type="submit" size="small" nbButton status="primary" (click)="addOrEditAdmin()">
+                        <span *ngIf="localisationForm.get('id').value">
+                          <!-- <nb-icon icon="arrow-circle-up-outline"></nb-icon> -->
+                          Save
+                        </span>
+                        <span *ngIf="!localisationForm.get('id').value">
+                          <!-- <nb-icon icon="save"></nb-icon> -->
+                           Add
+                        </span>
+                    </button>
+                    &nbsp;&nbsp;
+                    <button fullWidth type="submit" size="small" appearance="outline" nbButton status="primary">
+                        <span *ngIf="localisationForm.get('id').value">
+                            <!-- <nb-icon icon="arrow-circle-up-outline"></nb-icon> -->
+                            Clear Changes
+                        </span>
+                        <span *ngIf="!localisationForm.get('id').value">
+                            <!-- <nb-icon icon="save"></nb-icon>  -->
+                            Clear
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </nb-card-footer>
+   </nb-card>
+</ng-template>
+  
+<ng-template class="dialogBox" #DeleteDialog let-data let-ref="dialogRef">
+    <ngx-delete-dialog [PData]="deletePopUpData" (childEvent)=closeDeletePopup($event)></ngx-delete-dialog>
+</ng-template>
