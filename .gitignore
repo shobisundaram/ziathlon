@@ -7,8 +7,7 @@ build/
 tmp/
 temp/
 
-# Angular environment files
-src/environments/environment*.ts
+
 
 # Logs
 *.log
